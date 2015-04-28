@@ -59,7 +59,7 @@ class DatawrapperPlugin_ExportImage extends DatawrapperPlugin {
             // now send email to the user who is waiting for the image!
             dw_send_mail_attachment(
                 $job->getUser()->getEmail(),
-                'noreply@'.$GLOBALS['dw_config']['domain'],
+                $GLOBALS['dw_config']['email']['support'],
                 __('The image of your chart is ready', $this->getName()),
                 vksprintf(__('Hello,
 

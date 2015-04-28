@@ -17,7 +17,7 @@ function dw_send_support_email($to, $subject, $message, $replacements = array())
         $to,
         $subject,
         $message,
-        'From: noreply@'.$GLOBALS['dw_config']['domain']. "\r\n" .
+        'From: '.$GLOBALS['dw_config']['email']['support']. "\r\n" .
         'Reply-To: '.$GLOBALS['dw_config']['email']['support'] . "\r\n" .
         'X-Mailer: PHP/' . phpversion()
     );
