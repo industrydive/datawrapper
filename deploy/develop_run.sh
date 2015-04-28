@@ -30,6 +30,5 @@ chmod -R 777 /srv/datawrapper/charts/static /srv/datawrapper/charts/data \
 # hack for owning folder permissions by apache
 usermod -u 1000 www-data
 
-rm /srv/datawrapper/www/static/
 
 exec supervisord -n
