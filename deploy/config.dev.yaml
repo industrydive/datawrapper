@@ -96,10 +96,10 @@ plugins:
   #   url: piwik.datawrapper.de  # without http:// and trailing slash
   #   idSite: 5
 
-  publish-s3:
-    accesskey: AKIAIUPEUXJPEJHJ7E5Q
-    secretkey: 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
-    bucket: divedatawrapper
+#  publish-s3:
+#    accesskey: XXX
+#    secretkey: XXX
+#    bucket: divedatawrapper
 
 
 ## PHANTOMJS (optional)
