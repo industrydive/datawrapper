@@ -1,7 +1,7 @@
 FROM tutum/lamp:latest
 # VOLUME /var/lib/mysql
 ADD deploy/apache-vhost-for-static /etc/apache2/sites-available/001-static.conf
-RUN a2ensite 001-static
+ADD deploy/supervisord-executejobs.conf /etc/supervisor/conf.d/supervisord-executejobs.conf
 
 ADD deploy /deploy
 ADD . /srv/datawrapper/
@@ -10,6 +10,7 @@ RUN rm -fr /app && \
 	cd /srv/datawrapper/ && \
 	php /deploy/composer_install.php && \
 	php composer.phar install &&\
+	a2ensite 001-static &&\
 	chmod +x /deploy/*.sh
 RUN apt-get update &&\
 	apt-get install -y phantomjs php5-curl nullmailer
