@@ -11,7 +11,7 @@ while [[ RET -ne 0 ]]; do
     RET=$?
 done
 
-cat /deploy/setup_db.sql /srv/datawrapper/lib/core/build/sql/schema.sql /srv/datawrapper/autoload_*.sql | mysql -uroot
+cat /deploy/setup_db.sql /srv/datawrapper/lib/core/build/sql/schema.sql /deploy/autoload_*.sql | mysql -uroot
 
 echo "=> Inital SQL Loaded"
 
