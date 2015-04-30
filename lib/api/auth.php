@@ -28,51 +28,18 @@ $app->put('/account/lang', function() use ($app) {
 /* login user */
 $app->post('/auth/login', function() use($app) {
     $payload = json_decode($app->request()->getBody());
-    $user = $payload->user;      
-    $config = $GLOBALS['dw_config'];
-    $LDAP_SERVER =  $config["ldap"]["ldap_server"];
-    $LDAP_DOMAIN =  $config["ldap"]["ldap_domain"];
-    $ADMIN_GROUPS = $config["ldap"]["admin_groups"];
-    $admin = false;
-
-    //check for admin user against global config file
-    foreach ($ADMIN_GROUPS as $key => $value){
-        if(memberof_twpn_group($LDAP_DOMAIN, $LDAP_SERVER, $user,$payload->password,$value)){
-            $admin = true;
-        }
-    }
-
-    $ds=ldap_connect($LDAP_SERVER);
-    
-    try {
-        $r = ldap_bind($ds, "${user}@" . $LDAP_DOMAIN, $payload->password);
-        
-        $user = UserQuery::create()->findOneByEmail($user);
-        
-        if (!empty($user)) {
-            if($admin === true && $user->getRole() != "admin"){
-               $user->setRole("admin");
-            }
+    //  v-- don't expire login anymore
+    $user = UserQuery::create()->findOneByEmail($payload->email);
+    if (!empty($user) && $user->getDeleted() == false) {
+        if ($user->getPwd() === secure_password($payload->pwhash)) {
             DatawrapperSession::login($user, $payload->keeplogin == true);
             ok();
         } else {
-            $user = new User();
-            $user->setCreatedAt(time());
-            $user->setEmail($payload->user);
-            $user->setPwd("via_ldap");
-            if($admin === false){
-                $user->setRole("editor");
-            }
-            else{
-                $user->setRole("admin");
-            }
-            $user->setLanguage("en_GB");
-            $user->save();
-            DatawrapperSession::login($user, $payload->keeplogin == true);
-            ok();
+            Action::logAction($user, 'wrong-password', json_encode(get_user_ips()));
+            error('login-invalid', __('The password is incorrect.'));
         }
-    } catch (Exception $e) {
-        error('login-invalid', __('Invalid login.'));
+    } else {
+        error('login-email-unknown', __('The email is not registered yet.'));
     }
     
 

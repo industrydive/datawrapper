@@ -89,8 +89,8 @@ define(function() {
                 pwd = $('.login-pwd', loginForm).val(),
                 auth_salt = lgBtn.data('salt'),
                 payload = {
-                    user: $('.login-email', loginForm).val(),
-                    password: pwd,
+                    email: $('.login-email', loginForm).val(),
+                    pwhash: CryptoJS.HmacSHA256(pwd, auth_salt).toString(),
                     keeplogin: $('.keep-login', loginForm).attr('checked') == 'checked'
                 };
             if (pwd === '') {
