@@ -1,6 +1,6 @@
 # Datawrapper
 
-Datawrapper is a tool that enables anyone to create enticing visualizations in seconds, without any programming skills. This is the Washington Post's fork, and is very much a work in process on the non-master branches.
+Datawrapper is a tool that enables anyone to create enticing visualizations in seconds, without any programming skills. This is Industry Dive's fork which is based on the Washington Post's fork of roughly version 1.7.9.
 
 ##Installation instructions:
 
