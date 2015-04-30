@@ -2,6 +2,14 @@
 
 Datawrapper is a tool that enables anyone to create enticing visualizations in seconds, without any programming skills. This is Industry Dive's fork which is based on the Washington Post's fork of roughly version 1.7.9.
 
+##Docker Install
+Adjust your config.yaml and then:
+```
+cd /path/to/datwrapper
+docker build --tag="industrydive/datawrap" . 
+docker run -P --name datawrap -v `pwd`:/srv/datawrapper -i -t -p 80:80 industrydive/datawrap
+```
+
 ##Installation instructions:
 
 [Here are the published instructions](https://github.com/datawrapper/datawrapper/wiki/Installing-Datawrapper) which have a few errors/omissions (pull request is pending merge w/ origin) so below are our instructions, geared towards using MAMP for php/apache/mySQL (but anything will do).
