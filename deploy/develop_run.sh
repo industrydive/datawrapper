@@ -24,11 +24,14 @@ else
 fi
 
 # hack/fix permissions for datawrapper
-chmod -R 777 /srv/datawrapper/charts/static /srv/datawrapper/charts/data \
-	/srv/datawrapper/charts/images /srv/datawrapper/charts/data/tmp /srv/datawrapper/tmp
+chown -R www-data /srv/datawrapper 
 
 # hack for owning folder permissions by apache
 usermod -u 1000 www-data
 
 
 exec supervisord -n
+
+mkdir -p /srv/datawrapper/tmp
+chmod -R 777 /srv/datawrapper/charts/static /srv/datawrapper/charts/data \
+    /srv/datawrapper/charts/images /srv/datawrapper/charts/data/tmp /srv/datawrapper/tmp
