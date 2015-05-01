@@ -18,7 +18,7 @@ if (phantom.args.length < 2 || phantom.args.length > 5) {
     console.log('loading datawrapper chart');
     page.open(address, function (status) {
         if (status !== 'success') {
-            console.log('Unable to load the address!');
+            console.log('Unable to load the address! '+address+' status:'+status);
         } else {
             page.injectJs("jquery.min.js");
             page.evaluate(function() {

@@ -41,7 +41,6 @@ class DatawrapperPlugin_ExportAutoPng extends DatawrapperPlugin {
             $params['height']
         );
         if (empty($res[0])) {
-            $job->setStatus('done');
             // upload to CDN if possible
             DatawrapperHooks::execute(DatawrapperHooks::PUBLISH_FILES, array(
                 array(
@@ -50,6 +49,7 @@ class DatawrapperPlugin_ExportAutoPng extends DatawrapperPlugin {
                     'image/png'
                 ),
             ));
+            $job->setStatus('done');
         } else {
             // error message received, send log email
             dw_send_error_mail(
