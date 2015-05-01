@@ -6,7 +6,7 @@
 <script type="text/javascript">
 dw.backend.ready(function() {
     require(['dw/chart/publish'], function(publish) {
-        publish.init('{{ chartUrl }}'{% if publish %}, true{% if republish %}, true{% endif %}{% endif %});
+        publish.init('{{ chartUrlLocal }}'{% if publish %}, true{% if republish %}, true{% endif %}{% endif %});
     });
 });
 </script>
@@ -16,8 +16,14 @@ dw.backend.ready(function() {
 
             {% if user.isAbleToPublish %}
 
-            <p class="lead" style="margin-top:0">{% trans "Link to this visualisation" %}</p>
-            <p><a href="{{ chartUrl }}">{{ chartUrl }}</a></p>
+            <p class="lead" style="margin-top:0">{% trans "Link to this chart image" %}</p>
+
+            {% if chartImgUrl %}
+                <p><a href="{{ chartImgUrl }}" window="_new"><strong>{{ chartImgUrl }}</strong></a><br>
+                <small>Source: <a href="{{ chartUrl }}">Chart HTML Link</a></small></p>
+            {% else %}
+                <p><a href="{{ chartUrl }}">{{ chartUrl }}</a></p>
+            {% endif %}
 
             {% if republish %}
 
@@ -32,14 +38,16 @@ dw.backend.ready(function() {
 
             {% endif %}
 
-            <p class="lead">{% trans "Embed into your website" %}</p>
-            <p>{% trans "Just copy &amp; paste the following code into your website." %}</p>
-            <form class="form-inline">
-                <label>{% trans "Width" %}: <input type="text" id="embed-width" class="input-small" style="width:4ex" value="100%" disabled="disabled" /></label>&nbsp;&nbsp;
-                <label>{% trans "Height" %}: <input type="text" id="embed-height" class="input-small" style="width:4ex" value="400" /> px</label>
+            <!--
+                <p class="lead">{% trans "Embed into your website" %}</p>
+                <p>{% trans "Just copy &amp; paste the following code into your website." %}</p>
+                <form class="form-inline">
+                    <label>{% trans "Width" %}: <input type="text" id="embed-width" class="input-small" style="width:4ex" value="100%" disabled="disabled" /></label>&nbsp;&nbsp;
+                    <label>{% trans "Height" %}: <input type="text" id="embed-height" class="input-small" style="width:4ex" value="400" /> px</label>
 
-            <textarea style="font-size: 13px;padding:5px" id="iframe-code" class="well span4" rows="5"><iframe src="{{ chartUrl }}" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" oallowfullscreen="oallowfullscreen" msallowfullscreen="msallowfullscreen" width="100%" height="{{ chart.metadata.publish['embed-height'] }}" data-preserve-height="true"></iframe></textarea>
 
+                <textarea style="font-size: 13px;padding:5px" id="iframe-code" class="well span4" rows="5"><iframe src="{{ chartUrl }}" frameborder="0" allowtransparency="true" allowfullscreen="allowfullscreen" webkitallowfullscreen="webkitallowfullscreen" mozallowfullscreen="mozallowfullscreen" oallowfullscreen="oallowfullscreen" msallowfullscreen="msallowfullscreen" width="100%" height="{{ chart.metadata.publish['embed-height'] }}" data-preserve-height="true"></iframe></textarea>
+            -->
 
             <p class="lead">{%trans "Other things to do" %}</p>
 

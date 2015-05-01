@@ -42,7 +42,7 @@ define(function() {
                     if (res.status == "ok") {
                         $('.publishing').hide();
                         $('.published').fadeIn();
-                        $('#iframe-vis').attr('src', chartUrl);
+                        $('#iframe-vis').attr('src', chartUrl); // ESD: note this is actually chartLocalUrl
                         window.history.pushState("post_republish", "Datawrapper", "/chart/"+chart.get('id')+"/publish");
                     } else {
                         console.warn(res);

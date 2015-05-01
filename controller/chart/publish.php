@@ -29,6 +29,8 @@ $app->get('/chart/:id/publish', function ($id) use ($app) {
             'chartActions' => DatawrapperHooks::execute(DatawrapperHooks::GET_CHART_ACTIONS, $chart),
             'estExportTime' => ceil(JobQuery::create()->estimatedTime('export_image') / 60)
         );
+        // TODO: check for export-auto-png actually being installed
+        $page['chartImgUrl'] = str_replace('index.html','chart.png',$chart->getPublicUrl());
         add_header_vars($page, 'chart', 'chart-editor/publish.css');
         add_editor_nav($page, 4);
 
