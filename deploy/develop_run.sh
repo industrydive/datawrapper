@@ -35,3 +35,4 @@ exec supervisord -n
 mkdir -p /srv/datawrapper/tmp
 chmod -R 777 /srv/datawrapper/charts/static /srv/datawrapper/charts/data \
     /srv/datawrapper/charts/images /srv/datawrapper/charts/data/tmp /srv/datawrapper/tmp
+chmod -R 777 /srv/datawrapper/vendor/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/Serializer
